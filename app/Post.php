@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Carbon\Carbon;
 
 class Post extends Model
 {
@@ -19,4 +20,15 @@ class Post extends Model
     {
         return $this->belongsTo(User::class);
     }
+
+    public function getCreatedAtAttribute($value)
+    {
+        return Carbon::parse($value)->toFormattedDateString();
+    }
+
+    public function getRouteKeyName()
+    {
+        return 'slug';
+    }
+
 }

@@ -19,4 +19,5 @@ Route::get('/', function () {
 
 Route::group(['prefix' => 'post'], function () { 
     Route::get('/', 'PostController@index');
+    Route::get('{post}', 'PostController@show')->name('detail-post');
 });

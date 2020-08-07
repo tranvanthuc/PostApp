@@ -1,0 +1,16 @@
+.header {
+    background-color: #fff;
+}
+
+.title {
+    font-size: 5rem;
+}
+
+.desc {
+    font-size: 2rem;
+    color: #525252;
+}
+
+.item-post-body {
+    min-height: 10rem;
+}
