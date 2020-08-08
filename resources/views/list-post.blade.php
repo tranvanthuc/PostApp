@@ -22,7 +22,14 @@
     {{-- content --}}
     <div class="content py-3">
         <div class="container">
-            <h1 class="text-danger">Popular Laravel Tutorials</h1>
+            <div class="d-flex justify-content-between align-items-center">
+                <h1 class="text-danger">Popular Laravel Tutorials</h1>
+                @auth
+                    <h3><a href={{ route('create-post') }} >Create Post</a></h3>
+                @endauth
+            </div>
+
+            {{-- hien thi list post --}}
             <div class="row">
                 @forelse ($posts as $post)
                     <a class="col-4 text-decoration-none" href={{ route('detail-post', compact('post')) }}>

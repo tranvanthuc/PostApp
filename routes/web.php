@@ -19,6 +19,8 @@ Route::get('/', function () {
 
 Route::group(['prefix' => 'post'], function () { 
     Route::get('/', 'PostController@index')->name('list-post');
+    Route::post('/', 'PostController@store')->name('store-post');
+    Route::get('/create', 'PostController@create')->name('create-post');
     Route::get('{post}', 'PostController@show')->name('detail-post');
 });
 
