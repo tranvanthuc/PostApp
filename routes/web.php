@@ -21,3 +21,7 @@ Route::group(['prefix' => 'post'], function () {
     Route::get('/', 'PostController@index')->name('list-post');
     Route::get('{post}', 'PostController@show')->name('detail-post');
 });
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
