@@ -12,7 +12,13 @@ class PostController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('auth')->except('index', 'show');
+        $exceptMiddlewares = [
+            'index',
+            'show', 
+            'increaseLike',
+            'decreaseLike'
+        ];
+        $this->middleware('auth')->except($exceptMiddlewares);
     }
 
     /**
@@ -26,10 +32,13 @@ class PostController extends Controller
             $tagName = $request->get('tag');
             $tag = Tag::where('name', $tagName)->firstOrFail();
             $posts = $tag->posts()->orderByDesc('created_at')->paginate(6);
+        } else if ($request->has('search')) {
+            $search = $request->get('search');
+            $posts = Post::where('title', 'like', '%' . $search .'%')->orderByDesc('created_at')->paginate(6);
         } else {
             $posts = Post::orderByDesc('created_at')->paginate(6);
         }
-        
+
         return view('list-post', compact('posts'));
     }
 
@@ -125,6 +134,18 @@ class PostController extends Controller
         $post->delete();
         
         return redirect(route('list-post'));
+    }
+
+    public function increaseLike(Post $post)
+    {
+        $post->increment('likes');
+        return $post->likes;
+    }
+
+    public function decreaseLike(Post $post)
+    {
+        $post->decrement('likes');
+        return $post->likes;
     }
 
 }

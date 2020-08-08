@@ -24,7 +24,10 @@ Route::group(['prefix' => 'post'], function () {
     Route::get('/{post}/edit', 'PostController@edit')->name('edit-post');
     Route::post('/{post}/edit', 'PostController@update')->name('update-post');
     Route::get('/{post}/destroy', 'PostController@destroy')->name('destroy-post');
+    Route::get('/{post}/increase-like', 'PostController@increaseLike')->name('increase-like-post');
+    Route::get('/{post}/decrease-like', 'PostController@decreaseLike')->name('decrease-like-post');
     Route::get('/{post}', 'PostController@show')->name('detail-post');
+    
 });
 
 Auth::routes();

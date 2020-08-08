@@ -6,6 +6,7 @@
 
 @section('head')
     <link rel="stylesheet" href={{ asset('css/detail-post.css') }}>
+    <script src={{ asset('js/detail-post.js') }}></script>
 @endsection
 
 @section('content')
@@ -39,5 +40,17 @@
                 <a href={{ route('list-post') }}>Back to List</a>
             </div>
         </div>
+
+        {{-- likes container --}}
+        <div class="like-container">
+            <div id="increase-like" class="text-active" data-url={{ route('increase-like-post', compact('post')) }}>
+                <i class="fas fa-chevron-up fa-2x"></i>
+            </div>
+            <h4 class="font-weight-bold text-info" id="likes">{{ $post->likes }}</h4>
+            <div id="decrease-like" class="text-active" data-url={{ route('decrease-like-post', compact('post')) }}>
+                <i class="fas fa-chevron-down fa-2x"></i>
+            </div>
+        </div>
+
     </div>
 @endsection

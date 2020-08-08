@@ -14,3 +14,7 @@
 .item-post-body {
     min-height: 10rem;
 }
+
+#search {
+    width: 15rem;
+}

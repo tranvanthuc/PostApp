@@ -24,6 +24,17 @@
         <div class="container">
             <div class="d-flex justify-content-between align-items-center">
                 <h1 class="text-danger">Popular Laravel Tutorials</h1>
+                <form method="GET" action={{ route('list-post') }} >
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div>
+                            <input type="search" class="form-control" name="search" id="search" placeholder="Enter title">
+                        </div>
+                        
+                        <div>
+                            <button class="btn btn-outline-primary ml-3">Search</button>
+                        </div>
+                    </div>
+                </form>                
                 @auth
                     <h3><a href={{ route('create-post') }} >Create Post</a></h3>
                 @endauth
