@@ -18,6 +18,6 @@ Route::get('/', function () {
 });
 
 Route::group(['prefix' => 'post'], function () { 
-    Route::get('/', 'PostController@index');
+    Route::get('/', 'PostController@index')->name('list-post');
     Route::get('{post}', 'PostController@show')->name('detail-post');
 });

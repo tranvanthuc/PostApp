@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Post;
+use App\Tag;
 use Illuminate\Http\Request;
 
 class PostController extends Controller
@@ -12,9 +13,16 @@ class PostController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $posts = Post::paginate(6);
+        if ($request->has('tag')) {
+            $tagName = $request->get('tag');
+            $tag = Tag::where('name', $tagName)->firstOrFail();
+            $posts = $tag->posts()->paginate(6);
+        } else {
+            $posts = Post::paginate(6);
+        }
+        
         return view('list-post', compact('posts'));
     }
 

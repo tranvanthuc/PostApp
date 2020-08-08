@@ -12,6 +12,6 @@ $factory->define(Post::class, function (Faker $faker) {
     return [
         'title' => $title,
         'slug' => $slug,
-        'body' => $faker->paragraph,
+        'body' => $faker->paragraphs(10, true),
     ];
 });
