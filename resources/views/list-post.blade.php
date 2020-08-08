@@ -32,15 +32,27 @@
             {{-- hien thi list post --}}
             <div class="row">
                 @forelse ($posts as $post)
-                    <a class="col-4 text-decoration-none" href={{ route('detail-post', compact('post')) }}>
-                        <div class="card item-post my-3" >
-                            <img src="https://via.placeholder.com/350x200" class="card-img-top" alt="thumbnail-post">
-                            <div class="card-body item-post-body">
-                                <p>{{ $post->created_at }}</p>
-                                <h5 class="card-title font-weight-bold">{{ $post->title }}</h5>
+                    <div class="col-4 ">
+                        <a class="text-decoration-none"  href={{ route('detail-post', compact('post')) }}>
+                            <div class="card item-post my-3" >
+                                <img src="https://via.placeholder.com/350x200" class="card-img-top" alt="thumbnail-post">
+                                <div class="card-body item-post-body">
+                                    <p>{{ $post->created_at }}</p>
+                                    <h5 class="card-title font-weight-bold">{{ $post->title }}</h5>
+                                </div>
                             </div>
-                        </div>
-                    </a>
+                        </a>
+                        @auth
+                            <div class="bg-white d-flex flex-row justify-content-between p-2">
+                                <a class="btn btn-primary" href={{ route('edit-post', compact('post')) }}>
+                                    <i class="fas fa-edit"></i>
+                                </a>
+                                <a class="btn btn-danger" onclick="return confirm('Are you sure?')" href={{ route('destroy-post', compact('post')) }}>
+                                    <i class="fas fa-trash"></i>
+                                </a>
+                            </div>
+                        @endauth
+                    </div>
                 @empty
                     <div class="w-100 text-center">
                         <h3 class="font-weight-bold">There are no posts here.</h3>

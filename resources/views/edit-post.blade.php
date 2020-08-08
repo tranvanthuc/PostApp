@@ -1,0 +1,44 @@
+@extends('layouts.app')
+
+@section('title')
+    Edit Post
+@endsection
+
+@section('content')
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-4 offset-4">
+                <h1 class="text-center">Edit Post</h1>
+                <form method="POST" action={{ route('update-post', compact('post')) }}>
+                    @csrf
+                    <div class="form-group">
+                        <label for="title">Title</label>
+                        <input type="title" class="form-control" name="title" id="title" 
+                        placeholder="Enter title" value="{{ $post->title }}">
+                    </div>
+                    <div class="form-group">
+                        <label for="body">Body</label>
+                        <textarea name="body" class="form-control" id="body" 
+                        placeholder="Enter body" cols="20" rows="5">{{ $post->body }}</textarea>
+                    </div>
+        
+                    <div class="form-group">
+                        <label for="tags">Choose tags</label>
+                        <select class="form-control" id="tags" name="tag_ids[]" multiple>
+                        @foreach ($tags as $tag)
+                            @if (in_array($tag->id, $tagIds))
+                                <option value={{ $tag->id }} selected>{{ $tag->name }}</option>
+                            @else
+                                <option value={{ $tag->id }}>{{ $tag->name }}</option>
+                            @endif
+                            
+                        @endforeach
+                        </select>
+                    </div>
+                    
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </form>
+            </div>
+        </div>
+    </div>
+@endsection

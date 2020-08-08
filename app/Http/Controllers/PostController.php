@@ -86,8 +86,11 @@ class PostController extends Controller
      */
     public function edit(Post $post)
     {
-        //
+        $tags = Tag::all();
+        $tagIds = $post->tags()->pluck('tag_id')->toArray();
+        return view('edit-post', compact('tags', 'post', 'tagIds'));
     }
+
 
     /**
      * Update the specified resource in storage.
@@ -98,8 +101,18 @@ class PostController extends Controller
      */
     public function update(Request $request, Post $post)
     {
-        //
+        $tagIds = $request->get('tag_ids'); // [1, 2, 3]
+        
+        $post->title = $request->get('title');
+        $post->slug = Str::slug($request->get('title'), '-');
+        $post->body = $request->get('body');
+        $post->save();
+
+        $post->tags()->sync($tagIds);
+
+        return redirect(route('list-post'));
     }
+
 
     /**
      * Remove the specified resource from storage.
@@ -109,6 +122,9 @@ class PostController extends Controller
      */
     public function destroy(Post $post)
     {
-        //
+        $post->delete();
+        
+        return redirect(route('list-post'));
     }
+
 }
